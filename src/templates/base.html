@@ -23,14 +23,14 @@
   <!--NAVBAR-->
   <nav class="navbar navbar-expand-lg navbar-light bg-light techfont custom-navbar">
     <ul class="navbar-nav ml-5">
-      <li class="nav-item navbar-brand bigbrand"><a class="nav-link" href="#">Wall Talks</a></li>
-      <li class="nav-item mt-3"><a class="nav-link" href="#">About</a></li>
+      <li class="nav-item navbar-brand bigbrand"><a class="nav-link" href="{% url 'timeline:list' %}">Wall Talks</a></li>
+      <li class="nav-item mt-3"><a class="nav-link" href="#">API</a></li>
       <li class="nav-item mt-3"><a class="nav-link" href="https://github.com/muhammad-mamdouh/">Github</a></li>
       <li class="nav-item mt-3"><a class="nav-link" href="http://linkedin.com/in/muhammad-mamdouh">LinkedIn</a></li>
     </ul>
     <ul class="navbar-nav ml-auto mr-5">
       {% if user.is_authenticated %}
-        <li class="nav-item mt-1"><a class="nav-link" href="#">New Post</a></li>
+        <li class="nav-item mt-1"><a class="nav-link" href="#">New Message</a></li>
         <li class="nav-item mt-1 mr-2"><a class="nav-link" href="#">Drafts</a></li>
         <li class="nav-item mt-1"><a class="nav-link">Welcome: {{ user.username }}</a></li>
         <li class="nav-item mt-1 ml-3"><a class="nav-link" href="{% url 'account:logout' %}">Log Out</a></li>
@@ -47,7 +47,7 @@
   <div class="content container">
     <div class="row">
       <div class="col-md-11">
-        <div class="timeline_posts">
+        <div class="timeline_messages">
           {% block content %}{% endblock content %}
         </div>
       </div>

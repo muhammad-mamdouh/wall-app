@@ -17,17 +17,17 @@
   margin-right: auto;
 }
 
-.postdate {
+.messagedate {
   text-align: center;
 }
 
-.posttitle {
+.messagetitle {
   font-family: 'Russo One', sans-serif;
   font-size: 3em;
   text-align: center;
 }
 
-.postcontent {
+.messagecontent {
   font-family: 'Montserrat';
   font-size: 1.5em;
 }
