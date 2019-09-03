@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wall Talks</title>
+
+  <!--Bootstrap-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!--Medium Style Editor-->
+  <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+  <!--Custom CSS-->
+  <link rel="stylesheet" href="{% static 'css/master.css' %}">
+
+  <!--Google Fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Russo+One&display=swap" rel="stylesheet">
+</head>
+<body class="loader">
+
+  <!--NAVBAR-->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light techfont custom-navbar">
+    <ul class="navbar-nav ml-5">
+      <li class="nav-item navbar-brand bigbrand"><a class="nav-link" href="#">Wall Talks</a></li>
+      <li class="nav-item mt-3"><a class="nav-link" href="#">About</a></li>
+      <li class="nav-item mt-3"><a class="nav-link" href="https://github.com/muhammad-mamdouh/">Github</a></li>
+      <li class="nav-item mt-3"><a class="nav-link" href="http://linkedin.com/in/muhammad-mamdouh">LinkedIn</a></li>
+    </ul>
+    <ul class="navbar-nav ml-auto mr-5">
+
+        <li class="nav-item mt-1"><a class="nav-link" href="#">New Post</a></li>
+        <li class="nav-item mt-1 mr-2"><a class="nav-link" href="#">Drafts</a></li>
+        <li class="nav-item mt-1 mr-2"><a class="nav-link" href="#">Log Out</a></li>
+        <li class="nav-item mt-1"><a class="nav-link">Welcome: Username</a></li>
+
+        <li class="nav-item mt-1 navbar-right"><a class="nav-link" href="#">Log In</a></li>
+
+    </ul>
+  </nav>
+  <!--END NAVBAR-->
+
+
+  <!--CONTENT BLOCK-->
+  <div class="content container">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="timeline_posts">
+          {% block content %}{% endblock content %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--END CONTENT BLOCK-->
+
+  <!--Bootstrap-->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
