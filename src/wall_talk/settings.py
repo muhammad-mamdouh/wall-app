@@ -132,3 +132,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'media'),
 ]
+
+
+LOGIN_URL           = 'account:login'
+LOGIN_REDIRECT_URL  = 'home'
+# LOGOUT_REDIRECT_URL = 'home'

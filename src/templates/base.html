@@ -29,14 +29,15 @@
       <li class="nav-item mt-3"><a class="nav-link" href="http://linkedin.com/in/muhammad-mamdouh">LinkedIn</a></li>
     </ul>
     <ul class="navbar-nav ml-auto mr-5">
-
+      {% if user.is_authenticated %}
         <li class="nav-item mt-1"><a class="nav-link" href="#">New Post</a></li>
         <li class="nav-item mt-1 mr-2"><a class="nav-link" href="#">Drafts</a></li>
-        <li class="nav-item mt-1 mr-2"><a class="nav-link" href="#">Log Out</a></li>
-        <li class="nav-item mt-1"><a class="nav-link">Welcome: Username</a></li>
-
-        <li class="nav-item mt-1 navbar-right"><a class="nav-link" href="#">Log In</a></li>
-
+        <li class="nav-item mt-1"><a class="nav-link">Welcome: {{ user.username }}</a></li>
+        <li class="nav-item mt-1 ml-3"><a class="nav-link" href="{% url 'account:logout' %}">Log Out</a></li>
+      {% else %}
+        <li class="nav-item mt-1 mr-3"><a class="nav-link" href="{% url 'account:login' %}">Log In</a></li>
+        <li class="nav-item mt-1 navbar-right"><a class="nav-link" href="{% url 'account:signup' %}">Sign Up Now</a></li>
+      {% endif %}
     </ul>
   </nav>
   <!--END NAVBAR-->
