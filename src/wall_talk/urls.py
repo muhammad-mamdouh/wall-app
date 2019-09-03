@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', site_views.HomePageView.as_view(), name='home'),
     path('', include('account.urls', namespace='account')),
+    path('timeline/', include('timeline.urls', namespace='timeline')),
 ]
 
 if settings.DEBUG:

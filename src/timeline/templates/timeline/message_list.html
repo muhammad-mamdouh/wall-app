@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="centerstage mt-1">
+    {% for message in message_list %}
+      <div class="mt-3 mb-3">
+        <h1><a href="">{{ message.title }}</a></h1>
+        <div class="date ml-1">
+          <p>Published on: {{ message.date_published|date:"D M Y" }}</p>
+        </div>
+        <a href="">Comments: {{ message.approve_comments.count }}</a>
+      </div>
+      <hr>
+    {% endfor %}
+  </div>
+{% endblock content %}

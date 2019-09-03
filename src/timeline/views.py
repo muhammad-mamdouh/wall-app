@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.views.generic import (
+    ListView,
+)
+from .models import Message
 
-# Create your views here.
+
+class MessageListView(ListView):
+    model = Message
