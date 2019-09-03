@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # My apps
     'timeline',
+    'account',
 
     # Django itself apps
     'django.contrib.admin',
