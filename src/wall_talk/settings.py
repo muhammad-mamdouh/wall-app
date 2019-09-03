@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     # My apps
     'timeline',
     'account',
+    'bootstrap4',
 
     # Django itself apps
     'django.contrib.admin',
