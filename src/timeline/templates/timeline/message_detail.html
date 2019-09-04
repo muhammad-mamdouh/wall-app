@@ -33,7 +33,7 @@
   <!--End Check-->
 
   <hr>
-  <a class="btn btn-primary btn-comment" href="#">Add Comment</a>
+  <a class="btn btn-primary btn-comment" href="{% url 'timeline:new_comment' slug=message.slug %}">Add Comment</a>
 
   <div class="container">
     {% for comment in message.comments.all %}

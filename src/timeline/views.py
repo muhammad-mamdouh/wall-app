@@ -11,7 +11,7 @@ from django.urls import reverse_lazy, reverse
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from .models import Message
-from .forms import MessageForm
+from .forms import MessageForm, CommentForm
 
 
 class MessageListView(ListView):
@@ -71,6 +71,22 @@ class MessagePublishView(LoginRequiredMixin, RedirectView):
 
         return super().get(request, *args, **kwargs)
 
+
+class CommentAtMessageView(LoginRequiredMixin, CreateView):
+    model         = Message
+    form_class    = CommentForm
+    template_name = 'timeline/comment_form.html'
+
+    def form_valid(self, form, *args, **kwargs):
+        message             = get_object_or_404(Message, slug=self.kwargs.get('slug'))
+        self.object         = form.save(commit=False)
+        self.object.message = message
+        self.object.author  = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('timeline:single', kwargs={'slug': self.kwargs.get('slug')})
 
 
 class DraftListView(LoginRequiredMixin, ListView):
