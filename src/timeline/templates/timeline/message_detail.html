@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load staticfiles %}
+<h1 class="messagetitle loader">{{ message.title }}</h1>
+
+  <!--Two checks. 1-Message published? 2-If not, current user is the message author?-->
+  {% if message.date_published %}
+    <div class="date messagedate">
+      <p>Published on: {{ message.date_published }}</p>
+    </div>
+  {% else %}
+    {% if message.author == user %}
+      <a class="btn btn-dark" href="#">Publish</a>
+    {% else %}
+      <p>Not published yet.</p>
+    {% endif %}
+  {% endif %}
+  <!--End Two checks.-->
+
+  <p class="messagecontent mt-2 mb-2">{{ message.body|safe|linebreaksbr }}</p>
+  <p class="messagecontent text-muted">Author: {{ message.author.username }}</p>
+
+  <!--Check. If the current user is the message owner, update or delete-->
+  {% if user.is_authenticated and message.author == user %}
+    <a class="btn btn-default" href="#">
+      <img class="text-right ml-8" src="{% static 'icons/pencil.png' %}" height="35" width="35">
+    </a>
+    <a class="btn btn-default" href="#">
+      <img class="text-right ml-8" src="{% static 'icons/remove-button.png' %}" height="35" width="35">
+    </a>
+  {% endif %}
+  <!--End Check-->
+
+  <hr>
+  <a class="btn btn-primary btn-comment" href="#">Add Comment</a>
+
+  <div class="container">
+    {% for comment in message.comments.all %}
+      <br>
+
+      <!--Two main checks. 1-Approved comment? 2-If not. Current user is the comment author?-->
+      {% if comment.approved_comment %}
+        {{ comment.date_created }}
+        <p>{{ comment.text|safe|linebreaks }}</p>
+        <p class="text-muted">Shared By: {{ comment.author }}</p>
+      {% else %}
+        {{ comment.date_created }}
+        {% if comment.author == user %}
+          <a class="btn btn-default" href="#">
+            <img class="text-right ml-8" src="{% static 'icons/remove-button.png' %}" height="35" width="35">
+          </a>
+          <a class="btn btn-default" href="#">
+            <img class="text-right" src="{% static 'icons/check.png' %}" height="35" width="35">
+          </a>
+        {% endif %}
+        <p>{{ comment.text|safe|linebreaks }}</p>
+        <p class="text-muted">Shared By: {{ comment.author }}</p>
+      {% endif %}
+      <!--End Two main checks.-->
+
+    {% empty %}
+      <p>No Comments</p>
+    {% endfor %}
+  </div>
+{% endblock content %}
