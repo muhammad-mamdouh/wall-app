@@ -3,7 +3,7 @@
 {% block content %}
 
   <!--Check if it's edit request Change the title-->
-  {% if post_edit %}
+  {% if not message_edit %}
     <h1>Share a New Message</h1><hr>
   {% else %}
     <h1>Update your message</h1><hr>
