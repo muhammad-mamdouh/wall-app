@@ -7,7 +7,7 @@ class MessageForm(forms.ModelForm):
         model   = Message
         fields  = ['title', 'body']
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'textinputclass'}),
+            'title': forms.TextInput(attrs={'class': 'textinputclass form-control'}),
             'body': forms.Textarea(attrs={'class': 'editable medium-editor-textarea messagecontent'})
         }
 

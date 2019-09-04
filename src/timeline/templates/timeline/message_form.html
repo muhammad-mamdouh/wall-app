@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Share a New Message</h1><hr>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="message-save btn btn-dark">Share</button>
+  </form>
+
+  <script>var editor = new MediumEditor('.editable');</script>
+{% endblock content %}
