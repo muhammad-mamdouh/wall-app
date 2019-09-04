@@ -21,7 +21,7 @@
           </div>
           <!--End Two check-->
 
-          <a href="{% url 'timeline:single' slug=message.slug %}">Comments: {{ message.approve_comments.count }}</a>
+          <a href="{% url 'timeline:single' slug=message.slug %}">Comments: {{ message.get_approved_comments.count }}</a>
         </div>
         <hr>
       {% endfor %}
