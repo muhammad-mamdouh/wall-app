@@ -4,11 +4,12 @@ from django.utils.text import slugify
 from django.urls import reverse
 from django.contrib.auth.models import User
 import misaka
+import uuid
 
 
 class Message(models.Model):
     title          = models.CharField(max_length=150, unique=True)
-    slug           = models.SlugField(allow_unicode=True, blank=True, unique=True)
+    slug           = models.SlugField(allow_unicode=True, default=uuid.uuid1, unique=True)
     body           = models.TextField()
     body_html      = models.TextField(editable=False)
     date_created   = models.DateTimeField(default=timezone.now, verbose_name='date created')
