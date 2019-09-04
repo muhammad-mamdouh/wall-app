@@ -106,6 +106,23 @@ class CommentApproveView(LoginRequiredMixin, RedirectView):
         return super().get(request, *args, **kwargs)
 
 
+class CommentRemoveView(LoginRequiredMixin, RedirectView):
+
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse('timeline:single', kwargs={'slug': self.kwargs.get('slug')})
+
+    def get(self, request, *args, **kwargs):
+        comment = get_object_or_404(Comment, pk=self.kwargs.get('pk'))
+        try:
+            comment.delete()
+        except Comment.DoesNotExist:
+            messages.warning(self.request, "Sorry you aren't the author who posted this comment!")
+        else:
+            messages.info(self.request, "Your comment has been deleted successfully!")
+
+        return super().get(request, *args, **kwargs)
+
+
 class DraftListView(LoginRequiredMixin, ListView):
     model = Message
     extra_context = {'draft_messages': 'draft'}

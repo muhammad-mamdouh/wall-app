@@ -9,6 +9,7 @@ from .views import (
     DraftListView,
     CommentAtMessageView,
     CommentApproveView,
+    CommentRemoveView,
 )
 
 
@@ -24,4 +25,5 @@ urlpatterns = [
     path('message/<slug:slug>/publish/', MessagePublishView.as_view(), name='publish'),
     path('message/<slug:slug>/comment/', CommentAtMessageView.as_view(), name='new_comment'),
     path('message/<slug:slug>/comment/<int:pk>/approve/', CommentApproveView.as_view(), name='comment_approve'),
+    path('message/<slug:slug>/comment/<int:pk>/remove/', CommentRemoveView.as_view(), name='comment_remove'),
 ]
