@@ -137,3 +137,17 @@ STATICFILES_DIRS = [
 LOGIN_URL           = 'account:login'
 LOGIN_REDIRECT_URL  = 'home'
 # LOGOUT_REDIRECT_URL = 'home'
+
+# Password Reset Configs
+EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST          = 'smtp.gmail.com'
+EMAIL_PORT          = 587
+EMAIL_USE_TLS       = True
+EMAIL_HOST_USER     = 'mahammad.mamdouh@gmail.com'
+EMAIL_HOST_PASSWORD = 'ilpkzxwlgudqptti'        # This mail app will be deleted after a few days.
+# EMAIL_HOST_USER     = os.environ.get('EMAIL_USER')
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+
+# if DEBUG:
+#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
