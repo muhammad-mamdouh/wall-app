@@ -46,6 +46,19 @@
   <!--CONTENT BLOCK-->
   <div class="content container">
     <div class="row">
+
+      <!--Handle Flash Messages-->
+      <div class="col-md-11">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+      <!--End Handle Flash Messages-->
+
       <div class="col-md-11">
         <div class="timeline_messages">
           {% block content %}{% endblock content %}
