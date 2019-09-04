@@ -5,6 +5,7 @@ from .views import (
     MessageCreateView,
     MessageUpdateView,
     MessageDeleteView,
+    DraftListView,
 )
 
 
@@ -15,4 +16,6 @@ urlpatterns = [
     path('message/<slug:slug>/remove/', MessageDeleteView.as_view(), name='remove'),
     path('message/<slug:slug>/edit/', MessageUpdateView.as_view(), name='edit'),
     path('message/<slug:slug>/', MessageDetailView.as_view(), name='single'),
+
+    path('messages/drafts/', DraftListView.as_view(), name='drafts_list'),
 ]

@@ -31,7 +31,7 @@
     <ul class="navbar-nav ml-auto mr-5">
       {% if user.is_authenticated %}
         <li class="nav-item mt-1"><a class="nav-link" href="{% url 'timeline:create' %}">New Message</a></li>
-        <li class="nav-item mt-1 mr-2"><a class="nav-link" href="#">Drafts</a></li>
+        <li class="nav-item mt-1 mr-2"><a class="nav-link" href="{% url 'timeline:drafts_list' %}">Drafts</a></li>
         <li class="nav-item mt-1"><a class="nav-link">Welcome: {{ user.username }}</a></li>
         <li class="nav-item mt-1 ml-3"><a class="nav-link" href="{% url 'account:logout' %}">Log Out</a></li>
       {% else %}

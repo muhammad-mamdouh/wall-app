@@ -6,7 +6,7 @@ from django.views.generic import (
     UpdateView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib import messages
 from .models import Message
 from .forms import MessageForm
@@ -14,6 +14,10 @@ from .forms import MessageForm
 
 class MessageListView(ListView):
     model = Message
+
+    def get_queryset(self):
+        return Message.objects.filter(date_published__isnull=False).order_by('-date_published')
+
 
 
 class MessageDetailView(DetailView):
@@ -47,3 +51,14 @@ class MessageDeleteView(LoginRequiredMixin, DeleteView):
     def delete(self, *args, **kwargs):
         messages.success(self.request, 'Message has been deleted successfully!')
         return super().delete(*args, **kwargs)
+
+
+class DraftListView(LoginRequiredMixin, ListView):
+    model = Message
+    extra_context = {'draft_messages': 'draft'}
+
+    def get_queryset(self):
+        return Message.objects.filter(date_published__isnull=True).order_by('-date_created')
+
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse_lazy('timeline:single', kwargs={'slug': self.kwargs.get('slug')})
