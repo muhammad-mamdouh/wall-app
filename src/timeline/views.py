@@ -10,7 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
-from .models import Message
+from .models import Message, Comment
 from .forms import MessageForm, CommentForm
 
 
@@ -87,6 +87,23 @@ class CommentAtMessageView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse('timeline:single', kwargs={'slug': self.kwargs.get('slug')})
+
+
+class CommentApproveView(LoginRequiredMixin, RedirectView):
+
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse('timeline:single', kwargs={'slug': self.kwargs.get('slug')})
+
+    def get(self, request, *args, **kwargs):
+        comment = get_object_or_404(Comment, pk=self.kwargs.get('pk'))
+        try:
+            comment.approve()
+        except Comment.DoesNotExist:
+            messages.warning(self.request, "Sorry you aren't the author who posted this comment!")
+        else:
+            messages.success(self.request, "Your comment has been approved successfully!")
+
+        return super().get(request, *args, **kwargs)
 
 
 class DraftListView(LoginRequiredMixin, ListView):
