@@ -4,9 +4,11 @@ from django.views.generic import (
     CreateView,
     DeleteView,
     UpdateView,
+    RedirectView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
+from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from .models import Message
 from .forms import MessageForm
@@ -51,6 +53,24 @@ class MessageDeleteView(LoginRequiredMixin, DeleteView):
     def delete(self, *args, **kwargs):
         messages.success(self.request, 'Message has been deleted successfully!')
         return super().delete(*args, **kwargs)
+
+
+class MessagePublishView(LoginRequiredMixin, RedirectView):
+
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse('timeline:single', kwargs={'slug': self.kwargs.get('slug')})
+
+    def get(self, request, *args, **kwargs):
+        message = get_object_or_404(Message, slug=self.kwargs.get('slug'))
+        try:
+            message.publish()
+        except Message.DoesNotExist:
+            messages.warning(self.request, "Sorry you aren't the author who shared this message!")
+        else:
+            messages.success(self.request, "Your message has been published successfully!")
+
+        return super().get(request, *args, **kwargs)
+
 
 
 class DraftListView(LoginRequiredMixin, ListView):

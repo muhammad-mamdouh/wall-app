@@ -11,7 +11,7 @@
     </div>
   {% else %}
     {% if message.author == user %}
-      <a class="btn btn-dark" href="#">Publish</a>
+      <a class="btn btn-dark" href="{% url 'timeline:publish' slug=message.slug %}">Publish</a>
     {% else %}
       <p>Not published yet.</p>
     {% endif %}
