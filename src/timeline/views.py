@@ -3,6 +3,7 @@ from django.views.generic import (
     DetailView,
     CreateView,
     DeleteView,
+    UpdateView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -28,6 +29,15 @@ class MessageCreateView(LoginRequiredMixin, CreateView):
         self.object.author = self.request.user
         self.object.save()
         return super().form_valid(form)
+
+
+class MessageUpdateView(LoginRequiredMixin, UpdateView):
+    model         = Message
+    form_class    = MessageForm
+    extra_context = {'message_edit': 'valid'}
+
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse_lazy('timeline:single', kwargs={'slug': self.kwargs.get('slug')})
 
 
 class MessageDeleteView(LoginRequiredMixin, DeleteView):

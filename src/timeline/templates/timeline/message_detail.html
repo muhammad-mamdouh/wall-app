@@ -23,7 +23,7 @@
 
   <!--Check. If the current user is the message owner, update or delete-->
   {% if user.is_authenticated and message.author == user %}
-    <a class="btn btn-default" href="#">
+    <a class="btn btn-default" href="{% url 'timeline:edit' slug=message.slug %}">
       <img class="text-right ml-8" src="{% static 'icons/pencil.png' %}" height="35" width="35">
     </a>
     <a class="btn btn-default" href="{% url 'timeline:remove' slug=message.slug %}">
