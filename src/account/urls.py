@@ -7,6 +7,7 @@ from . import views
 app_name    = 'account'
 urlpatterns = [
     path('signup/', views.SignUpView.as_view(), name='signup'),
+    path('activate/<uidb64>/<token>/', views.ActivateAccount.as_view(), name='activate'),
     path('login/', auth_views.LoginView.as_view(template_name='account/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='account/logout.html'), name='logout'),
     path('profile/', views.profile, name='profile'),
