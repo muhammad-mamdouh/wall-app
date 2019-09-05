@@ -23,6 +23,12 @@
           <code><a href="http://localhost:8000/api/v1/message/sublime-text-tips-and-tricks/">http://localhost:8000/api/version?(v1|v2)/message/(message_slug)</a></code>
         </pre>
       </li>
+      <li>
+        Search for a specific keyword in all of the messages list. Search fields: message-title, message-body.
+        <pre class="prettyprint">
+          <code><a href="http://localhost:8000/api/v1/messages/?q=sublime">http://localhost:8000/api/version?(v1|v2)/messages/?q=keyword</a></code>
+        </pre>
+      </li>
     </ul>
 
     <h3>Registered authors can do:</h3>
@@ -55,6 +61,12 @@
         Delete their own messages. <code>You have to be the author of that message so you can delete it.</code>
         <pre class="prettyprint">
           <code><a href="http://localhost:8000/api/v1/message/sublime-text-tips-and-tricks/">http://localhost:8000/api/version?(v1|v2)/message/(message_slug)</a></code>
+        </pre>
+      </li>
+      <li>
+        Search for a specific keyword in all of the messages list. Search fields: message-title, message-body.
+        <pre class="prettyprint">
+          <code><a href="http://localhost:8000/api/v1/messages/?q=sublime">http://localhost:8000/api/version?(v1|v2)/messages/?q=keyword</a></code>
         </pre>
       </li>
     </ul>
