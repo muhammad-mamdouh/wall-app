@@ -35,6 +35,10 @@ class Message(models.Model):
     def get_approved_comments(self):
         return self.comments.filter(approved_comment=True)
 
+    @property
+    def owner(self):
+        return self.author
+
     def __str__(self):
         return self.title
 

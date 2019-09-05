@@ -6,6 +6,7 @@ from rest_framework.mixins import CreateModelMixin
 from django.db.models import Q
 from timeline.models import Message
 from .serializers import MessageSerializer
+from .permissions import IsOwnerOrReadOnly
 
 
 class MessageAPIView(CreateModelMixin, ListAPIView):
@@ -42,3 +43,4 @@ class MessageAPIRUDView(RetrieveUpdateDestroyAPIView):
     queryset         = Message.objects.all().order_by('-date_created')
     serializer_class = MessageSerializer
     lookup_field     = 'slug'
+    permission_classes = [IsOwnerOrReadOnly, ]
