@@ -51,3 +51,6 @@ python manage.py migrate
 ```
 python manage.py runserver
 ```
+
+## Features Screenshots
+[Go to this link, you'll find a directory with screens to all of the site's features](https://drive.google.com/drive/folders/1_Qr1wBXU7BVw0_CeBwSAefInk-BU5c7U)
