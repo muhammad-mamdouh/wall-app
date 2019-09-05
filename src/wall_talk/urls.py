@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -48,6 +48,9 @@ urlpatterns = [
         auth_views.PasswordResetCompleteView.as_view(template_name='account/password_reset_complete.html'),
         name='password_reset_complete'
     ),
+
+    # Messages API
+    re_path('api/(?P<version>(v1|v2))/', include('timeline.api.urls', namespace='api-messages')),
 ]
 
 if settings.DEBUG:
