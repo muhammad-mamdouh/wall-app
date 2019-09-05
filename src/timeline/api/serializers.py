@@ -25,7 +25,7 @@ class MessageSerializer(serializers.ModelSerializer):
         return username
 
     def get_text_from_comments(self, message):
-        comment_text = [{'comment text': msg.text, 'comment author': msg.author.username}
+        comment_text = [{'comment text': msg.text, 'comment author': msg.author.username, 'comment approval status': msg.approved_comment}
                             for msg in message.comments.all()]
         return comment_text
 
