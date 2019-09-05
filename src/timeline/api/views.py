@@ -1,29 +1,27 @@
 from rest_framework.generics import (
-    CreateAPIView,
     ListAPIView,
     RetrieveUpdateDestroyAPIView,
 )
+from rest_framework.mixins import CreateModelMixin
 from timeline.models import Message
 from .serializers import MessageSerializer
 
 
-class MessageAPIView(ListAPIView):
+class MessageAPIView(CreateModelMixin, ListAPIView):
     """
-    API endpoint that lists all of the created messages with its inner comments.
-    """
-    queryset         = Message.objects.all().order_by('-date_created')
-    serializer_class = MessageSerializer
-
-
-class MessageCreateView(CreateAPIView):
-    """
-    API endpoint that enables users to share new messages with others.
+    API endpoint that have the ability to:
+        1. Lists all of the created messages with its inner comments.
+        2. Enables users to share new messages with others.
     """
     queryset         = Message.objects.all().order_by('-date_created')
     serializer_class = MessageSerializer
+    lookup_field     = 'slug'
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
 class MessageAPIRUDView(RetrieveUpdateDestroyAPIView):
