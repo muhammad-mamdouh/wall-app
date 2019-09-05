@@ -3,6 +3,7 @@ from rest_framework.generics import (
     RetrieveUpdateDestroyAPIView,
 )
 from rest_framework.mixins import CreateModelMixin
+from django.db.models import Q
 from timeline.models import Message
 from .serializers import MessageSerializer
 
@@ -22,6 +23,13 @@ class MessageAPIView(CreateModelMixin, ListAPIView):
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
+
+    def get_queryset(self):
+        query_set = Message.objects.all()
+        query     = self.request.GET.get('q')
+        if query is not None:
+            query_set = query_set.filter(Q(title__icontains=query)|Q(body__icontains=query)).distinct()
+        return query_set
 
 
 class MessageAPIRUDView(RetrieveUpdateDestroyAPIView):
