@@ -51,3 +51,7 @@ class MessageAPIRUDView(RetrieveUpdateDestroyAPIView):
 
     def get_serializer_context(self, *args, **kwargs):
         return {'request': self.request}
+
+
+class MessageAPITutorial(TemplateView):
+    template_name = 'api/doc.html'

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div>
+    <h1 class="messagetitle">Messages API</h1>
+    <p class="messagecontent">
+      This is messages API to share data with other applications. It is divided to two main parts
+      <code>Guests</code> vs <code>Registered Authors</code>.
+    </p>
+
+    <h3>Guests can do:</h3>
+    <ul>
+      <li>
+        List all of the messages and their inner comments. Three messages per page.
+        <pre class="prettyprint">
+          <code><a href="http://localhost:8000/api/v1/messages/">http://localhost:8000/api/version?(v1|v2)/messages/</a></code>
+        </pre>
+      </li>
+      <li>
+        Display only one detailed message with its inner comments.
+        <pre class="prettyprint">
+          <code><a href="http://localhost:8000/api/v1/message/sublime-text-tips-and-tricks/">http://localhost:8000/api/version?(v1|v2)/message/(message_slug)</a></code>
+        </pre>
+      </li>
+    </ul>
+
+    <h3>Registered authors can do:</h3>
+    <ul>
+      <li>
+        List all of the messages and their inner comments. Three messages per page.
+        <pre class="prettyprint">
+          <code><a href="http://localhost:8000/api/v1/messages/">http://localhost:8000/api/version?(v1|v2)/messages/</a></code>
+        </pre>
+      </li>
+      <li>
+        Share new messages. <code>You have to an author to create a new message.</code>
+         <pre class="prettyprint">
+          <code><a href="http://localhost:8000/api/v1/messages/">http://localhost:8000/api/version?(v1|v2)/messages/</a></code>
+        </pre>
+      </li>
+      <li>
+        Display only one detailed message with its inner comments.
+        <pre class="prettyprint">
+          <code><a href="http://localhost:8000/api/v1/message/sublime-text-tips-and-tricks/">http://localhost:8000/api/version?(v1|v2)/message/(message_slug)</a></code>
+        </pre>
+      </li>
+      <li>
+        Update their own messages. <code>You have to be the author of that message so you can update it.</code>
+        <pre class="prettyprint">
+          <code><a href="http://localhost:8000/api/v1/message/sublime-text-tips-and-tricks/">http://localhost:8000/api/version?(v1|v2)/message/(message_slug)</a></code>
+        </pre>
+      </li>
+      <li>
+        Delete their own messages. <code>You have to be the author of that message so you can delete it.</code>
+        <pre class="prettyprint">
+          <code><a href="http://localhost:8000/api/v1/message/sublime-text-tips-and-tricks/">http://localhost:8000/api/version?(v1|v2)/message/(message_slug)</a></code>
+        </pre>
+      </li>
+    </ul>
+  </div>
+  <script>var editor = new MediumEditor('.editable');</script>
+{% endblock content %}
