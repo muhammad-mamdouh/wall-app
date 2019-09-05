@@ -3,12 +3,13 @@ from timeline.models import Message
 
 
 class MessageSerializer(serializers.ModelSerializer):
-    author = serializers.SerializerMethodField('get_username_from_author')
+    author   = serializers.SerializerMethodField('get_username_from_author')
     comments = serializers.SerializerMethodField('get_text_from_comments')
+    url      = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model  = Message
-        fields = ['slug', 'title', 'body', 'date_created', 'date_published', 'author', 'comments']
+        fields = ['url', 'slug', 'title', 'body', 'date_created', 'date_published', 'author', 'comments']
         read_only_fields = ['slug', 'date_created', 'author', 'comments']
 
     def validate_title(self, value):
@@ -27,3 +28,7 @@ class MessageSerializer(serializers.ModelSerializer):
         comment_text = [{'comment text': msg.text, 'comment author': msg.author.username}
                             for msg in message.comments.all()]
         return comment_text
+
+    def get_url(self, obj):
+        request = self.context.get('request')
+        return obj.get_api_url(request=request)

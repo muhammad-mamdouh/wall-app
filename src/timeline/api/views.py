@@ -4,6 +4,7 @@ from rest_framework.generics import (
 )
 from rest_framework.mixins import CreateModelMixin
 from django.db.models import Q
+from django.views.generic import TemplateView
 from timeline.models import Message
 from .serializers import MessageSerializer
 from .permissions import IsOwnerOrReadOnly
@@ -32,6 +33,9 @@ class MessageAPIView(CreateModelMixin, ListAPIView):
             query_set = query_set.filter(Q(title__icontains=query)|Q(body__icontains=query)).distinct()
         return query_set
 
+    def get_serializer_context(self, *args, **kwargs):
+        return {'request': self.request}
+
 
 class MessageAPIRUDView(RetrieveUpdateDestroyAPIView):
     """
@@ -44,3 +48,6 @@ class MessageAPIRUDView(RetrieveUpdateDestroyAPIView):
     serializer_class = MessageSerializer
     lookup_field     = 'slug'
     permission_classes = [IsOwnerOrReadOnly, ]
+
+    def get_serializer_context(self, *args, **kwargs):
+        return {'request': self.request}

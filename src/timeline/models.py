@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.urls import reverse
 from django.contrib.auth.models import User
+from rest_framework.reverse import reverse as api_reverse
 import misaka
 import uuid
 
@@ -38,6 +39,10 @@ class Message(models.Model):
     @property
     def owner(self):
         return self.author
+
+    def get_api_url(self, request=None):
+        return api_reverse('api-messages:message-rud',
+                           kwargs={'slug': self.slug, 'version': 'v1'}, request=request)
 
     def __str__(self):
         return self.title
