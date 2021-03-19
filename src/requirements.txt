@@ -3,7 +3,7 @@ cffi==1.12.3
 Django==2.2.5
 django-bootstrap4==1.0.1
 django-braces==1.13.0
-djangorestframework==3.10.3
+djangorestframework==3.11.2
 djangorestframework-jwt==1.11.0
 misaka==2.1.1
 pycparser==2.19
